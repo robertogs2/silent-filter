@@ -1,11 +1,3 @@
-# Copyright (C) 2018
-# Área Académica de Ingeniería en Computadoras, ITCR, Costa Rica
-#
-# This file is part of the numerical analysis lecture CE3102 at TEC
-#
-# Author: Pablo Alvarado
-# Date  : 28.12.2017
-
 find_package (Boost COMPONENTS system filesystem REQUIRED)
 include_directories (${CMAKE_SOURCE_DIR}/include ${Boost_INCLUDE_DIRS})
 
@@ -17,6 +9,6 @@ list(REMOVE_ITEM SRCS "paths.cpp")
 include(CheckIncludeFiles)
 
 add_library(silent STATIC ${SRCS} ${HEADERS})
-add_executable(proyecto2 paths.cpp)
-target_link_libraries(proyecto2 silent ${OpenCV_LIBS} ${Boost_LIBRARIES} python2.7)
+add_executable(silent_project paths.cpp)
+target_link_libraries(silent_project silent ${OpenCV_LIBS} ${Boost_LIBRARIES} python2.7)
 

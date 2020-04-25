@@ -1,14 +1,4 @@
-/**
- * Copyright (C) 2018
- * Área Académica de Ingeniería en Computadoras, TEC, Costa Rica
- *
- * This file is part of the CE3102 Numerical Analysis lecture at TEC
- *
- * @Author: 
- * @Date  : 24.02.2018
- */
-
-#include <AnpiConfig.hpp>
+#include <Config.hpp>
 #include <Matrix.hpp>
 #include <Exception.hpp>
 #include <DFT.hpp>
@@ -36,15 +26,20 @@ int main() {
     // odft.setFilter({1,2});
     // silent::printVector(odft.process(v));
 
-    std::vector<double> vector = std::vector<double>(1000);
-    for(size_t i = 0; i < 1000; ++i){
-        vector[i] = cos(0.2*i);
+    size_t L = 100;
+    std::vector<double> vector = std::vector<double>(L);
+    for(double w = 0.01; w < 3.15; w+=0.1){
+        for(size_t i = 0; i < L; ++i){
+            vector[i] = cos(w*i);
+        }
+        silent::SpectrumDFT<double> sdft = silent::SpectrumDFT<double>(L);
+        double wMax = 0;
+        double magMax = 0;
+        sdft.findMaxW(vector, wMax, magMax);
+        std::cout << w << " : " << wMax << " : " << std::abs(w-wMax) << std::endl;
     }
-    silent::SpectrumDFT<double> sdft = silent::SpectrumDFT<double>(1000);
-    double wMax = 0;
-    double magMax = 0;
-    sdft.findMaxK(vector, wMax, magMax);
-    std::cout << wMax << std::endl;
+    
+    
     return EXIT_SUCCESS;
 }
   

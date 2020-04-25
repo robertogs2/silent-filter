@@ -32,7 +32,7 @@ namespace silent{
             N = dft.N;
         }
 
-        void findMaxK(std::vector<T> x, T& wMax, T& magMax){
+        void findMaxW(std::vector<T> x, T& wMax, T& magMax){
             if (x.size() > N) throw silent::Exception("N too short for spectrum");
             std::vector<std::complex<T>> Xk = dft.transform(x);
             const T pi = boost::math::constants::pi<T>();
@@ -46,14 +46,13 @@ namespace silent{
                     magMax = mag;
                     kMax = k;
                 }
+                if (k > N/2 + 1) break;
                 ++k; 
             }
             wMax = kMax*2*pi/T(N);
-
         }
 
         private:
-
         size_t N;
 
     };
